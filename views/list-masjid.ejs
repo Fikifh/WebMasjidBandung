@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" type="image/png" href="/../images/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="/../images/favicon.png"/>
+	<% include partials/head.ejs %>
+	<title>Daftar Masjid Bandung</title>
+</head>
+<body>
+		<nav class="navbar navbar-inverse">
+						<ul class="nav navbar-nav">
+							<li><a><img src="/../images/favicon1.png" style="height:20px;"></a></li>
+							<li><a href="#">Home</a></li>
+							<li><a href="profil">Profil Mesjid/Mushola</a></li>
+							<li><a href="kegiatan">Kegiatan</a></li>
+						</ul>
+
+						<!--<ul class="nav navbar-nav navbar-right">
+							<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+						</ul>-->
+					</div>
+				</div>
+			</nav>
+	<div class="jumbotron">
+  <div class="container text-center">
+  </div>
+</div>
+
+<div class="container">
+	<%data.forEach(function(masjid){%>
+	<a href=""><button class="col-sm-4"><p class="list-masjid"><%=masjid.nama_masjid%></p></button></a><br/>
+	<%})%>	
+
+</body>
+</html>

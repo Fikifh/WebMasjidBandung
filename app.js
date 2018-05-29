@@ -18,11 +18,23 @@ var app = express();
 // patrse body params and attache them to req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "toor",
+  database: "simac"
+});
 app.get('/', function (req, res) {
-  res.render('home', {
-  	title: "Sistem Informasi Mesjid Cibiru"
-  })
+	sql = 'select * from masjid';
+	con.query(sql, function(err, result, fields){
+		res.render('home',{
+			title: "Sistem Informasi Mesjid Cibiru",
+			data:result
+		})
+	})    	
+});
+router.route('/list-masjid').post(function(req, res){
+	
 });
 app.use('/home',index);
 

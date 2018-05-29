@@ -146,3 +146,15 @@ form[role=login] {
 	.form-links a {
 		color: #fff;
 	}
+.list-masjid{
+	color: white;
+	text-align: center;
+}
+.masjid{
+	width: 300px;
+	background:black;
+}
+.list-mjd{
+	color: white;
+	text-decoration: none;
+}
