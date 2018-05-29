@@ -4,16 +4,36 @@ var mysql = require('mysql');
 var app = express();
 //var json = require('res-json');
 var session = require('express-session');
-
-
+const masjid = require('./masjid');
+const admin = require('./admin');
+const router = express.Router();
 //connection
-    connection = mysql.createPool({
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "toor",
+  database: "simac"
+});
+
+
+router.use('/masjid', masjid);
+router.use('/admin', admin);
+app.use('/home', function(req, res){
+    res.render('home', {
+        title: "Sistem Informasi Mesjid Cibiru"
+    });
+});
+
+
+
+
+    /*connection = mysql.createPool({
     host:'localhost',
     user:'root',
-    password:'',
+    password:'toor',
     port:3306,
     database:'simac'
-});
+});*/
 
 exports.home = function(req, res){
     res.render('home', {
@@ -39,7 +59,7 @@ exports.signup = function(req, res){
 
 exports.save = function(req, res){
      var input = JSON.parse(JSON.stringify(req.body));
-    connection.getConnection(function (error, connection) {
+    con.getConnection(function (error, connection) {
         if(this.error){
             this.error.release();
             console.log(error);
@@ -54,12 +74,13 @@ exports.save = function(req, res){
             no_telpon    : input.no_telpon
         };
             console.log("Connected!!");
-         var query = connection.query("INSERT INTO users set ? ",data, function(err, rows){
+            var query = "INSERT INTO users set ?";
+            con.query(query,data, function(err, rows){
             connection.release();
             if (err)
               console.log(err);
 
-             res.redirect('/sign-up/add');
+            res.redirect('/sign-up/add');
         });
       };
    });
@@ -112,3 +133,7 @@ exports.notFound = function(req, res){
 exports.listen = function(req, res){
     console.log("This application running at port 3000");
 };
+
+module.exports = router;
+
+
